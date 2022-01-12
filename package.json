@@ -1,0 +1,19 @@
+{
+  "name": "jensen-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gdansklol/jensen-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gdansklol/jensen-frontend/issues"
+  },
+  "homepage": "https://github.com/Gdansklol/jensen-frontend#readme"
+}
