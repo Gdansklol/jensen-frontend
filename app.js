@@ -1,38 +1,22 @@
-var username
-var password
-
 document.addEventListener("submit",(event)=>{
-    console.log("Submitted")
-    username = document.getElementById("username").value
+    console.log("submitted")
+    user = document.getElementById("user").value
     password = document.getElementById("password").value
 
     const headers = new Headers()
     headers.append("Accept", "application/json")
-    headers.append("Authorization", btoa(username + ":" + password))
+    headers.append("Authorization",btoa(user + ":" + password))
 
-    fetch('http://localhost:3000/',{headers: headers}).then(function (response) {
-        if(response.ok){
-            document.write("SUCCESFULL LOGIN")
-        }
-        throw respons;
-    }).then(function (data){
-        console.log(data);
-    }).catch(function (error){
-        console.log(error);
-    });
     event.preventDefault()
 })
 
+function validate(){
+    console.log("Hello World");
+    let user = document.getElementById("user").value
+    let password = document.getElementById("password").value
+    console.log(`User = ${user} Password = ${password}`)
 
-console.log("Hello");
-fetch("http://localhost:3000",{})
-.then(()=>{})
-.catch(()=>{
-    console.log("an error occured")
-})
-
-
-
-
-
-
+    const XHR = new XMLHttpRequest(), FD = new FormData();
+    FD.append(name,data [user]);
+    FD.append(name,data [password]);
+}
