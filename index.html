@@ -4,17 +4,113 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jensen-frontend</title>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="345055956548-920o3nmh8eps2a8pb3scejql66e7o6b0.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link rel="styelsheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&family=Lato:ital,wght@0,100;0,300;1,100&family=PT+Sans&display=swap" rel="stylesheet">
+    <title>Jensen-Frontend</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script type="text/javascript">
+    
+    
+    function chekrecaptchaSubmit(){
+        if(grecaptcha.getResponse() == " "){
+        alert("Please check the reCaptcha");
+        return false;
+    }else{
+        return true;
+    }
+}
+    </script>  
 </head>
 <body>
-    <form>
-        <label>username</label>
-        <input name ="username" type ="text" />
-        <label>password</label>
-        <input type="password" name="password" autocomplete="on">
-        <input type = "submit"/>
-        <script src="app.js"></script>
+    <H1>Wellcome our login website !</H1>
+    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    <button type= "button" onclick="signOut();">Sign Out</button>
+    <script>
+      function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+      }
+
+      function signOut(){
+          gapi.auth2.getAuthInstance().disconnection();
+      }
+    </script>
+
+    <form method="post"  action =" recaptcha.php" onsubmit="return
+    chekrecaptchaSubmit();">
+        Username:<br>
+        <input id="user" type="text" name="user" placeholder="user" required><br><br>
+        Password:<br>
+        <input id="password" type="password" name="password" placeholder="password" required><br><br>
+        <input id="login-btn" type="submit" value="login"  >
     </form>
-    
+
+<!-- reCaptcha-->
+    <div class="form-group recaptcha-container">
+        <div class="g-recaptcha" 
+        data-sitekey="6Lee_RoeAAAAAIcUM203sU7V9jaQptIBFtwOvvFw"
+        data-callback="recapcha_callback" data-theme=""></div>
+        </div>
+    </br>
+        <div id="consent-popup" class="hidden">
+            <p>By using this site you agree to our <a href="#">Terms and conditions</a>.
+        </br> please <a id="accept" href="#">Accept</a> these before using our site.
+            </p>
+        </div>
+
+        <div class="wrapper">
+            <img src="img/cookie02.png" alt="cookie" width="100" height="100"/>
+            <div class="content">
+                <header>Cookies Consent</header>
+                <p>This website use cookies to ensure you get the 
+                    best experience</p>
+                    <div class="buttons">
+                        <button class="item">I understand</button>
+                        <a href="#" class ="item">Learn more</a>
+                    </div>
+                </div>
+            </div>
+
+        <script>
+            function recaptcha_callback(){
+                var loginBtn = document-querySelector('#login-btn');
+                loginBtn.removeAttribute('disabled');
+                loginBtn.style.cursor= 'pointer';
+            }
+
+            const cookieBox = document.querySelector(".wrapper"),
+acceptBtn = cookieBox.querySelector(".buttons button");
+
+acceptBtn.onclick =()=>{
+    console.log("Cookies Consent button clicked !!");
+    //setting cookie for 1 month, after 1 month cookie will be expired automatically
+    document.cookie="CookieBy=CodingSverige;max-age="+60*60*24*30;
+    if(document.cookie){
+        //if the above cookie set
+        cookieBox.classList.add("hide");
+    }else{
+    alert("Cookie can't to set!");//if cookie can´t be set the alert an error
+    }
+}
+//let's hide the cookie box if cookie is set and not expired
+let checkCookie = document.cookie.indexOf("CookieBy=CodingSverige");//checking our set cookie
+checkCookie != 1 ? cookieBox.classList.add("hide"):cookieBox.classList.remove("hide");
+
+
+    </script> 
+<script src="app.js"></script>
 </body>
 </html>
