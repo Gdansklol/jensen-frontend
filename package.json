@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/Gdansklol/jensen-frontend/issues"
   },
-  "homepage": "https://github.com/Gdansklol/jensen-frontend#readme"
+  "homepage": "https://github.com/Gdansklol/jensen-frontend#readme",
+  "dependencies": {
+    "audit": "^0.0.6",
+    "audit-log": "^0.9.1",
+    "lodash": "^4.17.21"
+  }
 }
